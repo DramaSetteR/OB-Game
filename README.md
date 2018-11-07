@@ -1,2 +1,2 @@
 # OB-Game
-Once Screen / Two Players Game
+One Screen / Two Players Game
