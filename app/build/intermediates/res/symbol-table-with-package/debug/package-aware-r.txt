@@ -11,6 +11,9 @@ anim abc_slide_out_bottom
 anim abc_slide_out_top
 anim abc_tooltip_enter
 anim abc_tooltip_exit
+anim fadein
+anim fadeout
+anim shake_animation
 attr actionBarDivider
 attr actionBarItemBackground
 attr actionBarPopupTheme
@@ -634,7 +637,9 @@ drawable c1
 drawable d
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable k
 drawable location
+drawable location1
 drawable notification_action_background
 drawable notification_bg
 drawable notification_bg_low
@@ -688,6 +693,7 @@ id beginning
 id blocking
 id board
 id bottom
+id bturn
 id buttonPanel
 id center
 id center_horizontal
@@ -724,6 +730,7 @@ id icon
 id icon_group
 id ifRoom
 id image
+id imageVdasdadasiew
 id imageView
 id info
 id invisible
@@ -742,6 +749,15 @@ id loc6
 id loc7
 id loc8
 id loc9
+id loca1
+id loca2
+id loca3
+id loca4
+id loca5
+id loca6
+id loca7
+id loca8
+id loca9
 id message
 id middle
 id multiply
@@ -754,6 +770,7 @@ id notification_main_column_container
 id o_circle1
 id o_circle2
 id o_circle3
+id oturn
 id packed
 id parent
 id parentPanel
@@ -850,7 +867,6 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
-layout activity_main
 layout activity_splash
 layout notification_action
 layout notification_action_tombstone
@@ -858,12 +874,15 @@ layout notification_template_custom_big
 layout notification_template_icon_group
 layout notification_template_part_chronometer
 layout notification_template_part_time
+layout oboard
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
 mipmap ic_launcher
 mipmap ic_launcher_round
+raw butclick
+raw butdown
 string abc_action_bar_home_description
 string abc_action_bar_up_description
 string abc_action_menu_overflow_description

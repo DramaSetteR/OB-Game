@@ -2,7 +2,7 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.walgo.mygame">
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRA TE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <application
 
@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".OBoard">
         </activity>
         <activity android:name=".Splash">
             <intent-filter>

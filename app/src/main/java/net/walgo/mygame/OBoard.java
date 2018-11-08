@@ -2,6 +2,7 @@ package net.walgo.mygame;
 
 
 import android.annotation.SuppressLint;
+import android.media.MediaPlayer;
 import android.os.Vibrator;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-public class MainActivity extends AppCompatActivity {
+public class OBoard extends AppCompatActivity {
 
     private ImageView b_circle1;
     private ImageView b_circle2;
@@ -33,19 +34,26 @@ public class MainActivity extends AppCompatActivity {
     private ImageView loc7;
     private ImageView loc8;
     private ImageView loc9;
+
+    private ImageView oturn, bturn;
     private float blueXCoordinate, blueYCoordinate;
     private float orangeXCoordinate, orangeYCoordinate;
 
-    public double c1, c2, c3, c4, c5, c6, c7, c8, c9;
-    public double orangeF1, orangeF2, orangeF3, blueF1, blueF2, blueF3;
+    private float c1, c2, c3, c4, c5, c6, c8, c9, c7;
+    private float orangeF1, orangeF2, orangeF3, blueF1, blueF2, blueF3;
 
     private TextView wintext;
+    private MediaPlayer down, click;
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.oboard);
         final Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+
+        click = MediaPlayer.create(this, R.raw.butclick);
+        down = MediaPlayer.create(this, R.raw.butdown);
 
         b_circle1 = findViewById(R.id.b_circle1);
         b_circle2 = findViewById(R.id.b_circle2);
@@ -63,22 +71,25 @@ public class MainActivity extends AppCompatActivity {
         loc8 = findViewById(R.id.loc8);
         loc9 = findViewById(R.id.loc9);
         wintext = findViewById(R.id.wintext);
+        oturn = findViewById(R.id.oturn);
+        bturn = findViewById(R.id.bturn);
 
         setparams();
-
-
+        randomTurn();
 
         b_circle1.setOnTouchListener(new View.OnTouchListener() {
-
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                click.start();
                 o_clone = null;
                 switch (event.getActionMasked()) {
                     case MotionEvent.ACTION_DOWN:
+                        gaqroba2();
                         Coordinates();
-                        break;
-                    case MotionEvent.ACTION_UP:
                         b_clone = findViewById(R.id.b_circle1);
+
+                    case MotionEvent.ACTION_UP:
+                        BlueState();
                         break;
 
                     default:
@@ -96,13 +107,16 @@ public class MainActivity extends AppCompatActivity {
         b_circle2.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                click.start();
                 o_clone = null;
                 switch (event.getActionMasked()) {
                     case MotionEvent.ACTION_DOWN:
+                        gaqroba2();
                         Coordinates();
-                        break;
-                    case MotionEvent.ACTION_UP:
                         b_clone = findViewById(R.id.b_circle2);
+
+                    case MotionEvent.ACTION_UP:
+                        BlueState();
                         break;
 
                     default:
@@ -116,13 +130,16 @@ public class MainActivity extends AppCompatActivity {
         b_circle3.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                click.start();
                 o_clone = null;
                 switch (event.getActionMasked()) {
                     case MotionEvent.ACTION_DOWN:
+                        gaqroba2();
                         Coordinates();
-                        break;
-                    case MotionEvent.ACTION_UP:
                         b_clone = findViewById(R.id.b_circle3);
+
+                    case MotionEvent.ACTION_UP:
+                        BlueState();
                         break;
 
                     default:
@@ -136,13 +153,17 @@ public class MainActivity extends AppCompatActivity {
         o_circle1.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                click.start();
                 b_clone = null;
                 switch (event.getActionMasked()) {
                     case MotionEvent.ACTION_DOWN:
+
+                        gaqroba2();
                         Coordinates();
-                        break;
-                    case MotionEvent.ACTION_UP:
                         o_clone = findViewById(R.id.o_circle1);
+
+                    case MotionEvent.ACTION_UP:
+                        OrangeState();
                         break;
 
                     default:
@@ -156,13 +177,17 @@ public class MainActivity extends AppCompatActivity {
         o_circle2.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                click.start();
                 b_clone = null;
                 switch (event.getActionMasked()) {
                     case MotionEvent.ACTION_DOWN:
+                        gaqroba2();
+
                         Coordinates();
-                        break;
-                    case MotionEvent.ACTION_UP:
                         o_clone = findViewById(R.id.o_circle2);
+
+                    case MotionEvent.ACTION_UP:
+                        OrangeState();
                         break;
 
                     default:
@@ -176,17 +201,19 @@ public class MainActivity extends AppCompatActivity {
         o_circle3.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                click.start();
                 b_clone = null;
                 switch (event.getActionMasked()) {
                     case MotionEvent.ACTION_DOWN:
+                        gaqroba2();
                         Coordinates();
-                        break;
-                    case MotionEvent.ACTION_UP:
                         o_clone = findViewById(R.id.o_circle3);
+
+                    case MotionEvent.ACTION_UP:
+                        OrangeState();
                         break;
 
                     default:
-
 
                 }
                 return true;
@@ -197,7 +224,8 @@ public class MainActivity extends AppCompatActivity {
         loc1.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
-
+                down.start();
+                gaqroba2();
                 if (b_clone == b_circle1 || b_clone == b_circle2 || b_clone == b_circle3) {
                     blueXCoordinate = loc1.getX();
                     blueYCoordinate = loc1.getY();
@@ -219,6 +247,8 @@ public class MainActivity extends AppCompatActivity {
                         case MotionEvent.ACTION_UP:
 
                             CheckBlue();
+                            oturn.setVisibility(View.VISIBLE);
+                            bturn.setVisibility(View.INVISIBLE);
                             break;
                         default:
 
@@ -242,6 +272,8 @@ public class MainActivity extends AppCompatActivity {
 
                         case MotionEvent.ACTION_UP:
                             CheckOrange();
+                            oturn.setVisibility(View.INVISIBLE);
+                            bturn.setVisibility(View.VISIBLE);
                             break;
 
                         default:
@@ -260,6 +292,8 @@ public class MainActivity extends AppCompatActivity {
         loc2.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
+                down.start();
+                gaqroba2();
                 if (b_clone == b_circle1 || b_clone == b_circle2 || b_clone == b_circle3) {
                     blueXCoordinate = loc2.getX();
                     blueYCoordinate = loc2.getY();
@@ -280,8 +314,9 @@ public class MainActivity extends AppCompatActivity {
 
 
                         case MotionEvent.ACTION_UP:
-
                             CheckBlue();
+                            oturn.setVisibility(View.VISIBLE);
+                            bturn.setVisibility(View.INVISIBLE);
                             break;
                         default:
 
@@ -305,6 +340,8 @@ public class MainActivity extends AppCompatActivity {
 
                         case MotionEvent.ACTION_UP:
                             CheckOrange();
+                            oturn.setVisibility(View.INVISIBLE);
+                            bturn.setVisibility(View.VISIBLE);
                             break;
 
                         default:
@@ -321,6 +358,8 @@ public class MainActivity extends AppCompatActivity {
         loc3.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
+                down.start();
+                gaqroba2();
                 if (b_clone == b_circle1 || b_clone == b_circle2 || b_clone == b_circle3) {
                     blueXCoordinate = loc3.getX();
                     blueYCoordinate = loc3.getY();
@@ -339,8 +378,9 @@ public class MainActivity extends AppCompatActivity {
                             figuresXY();
 
                         case MotionEvent.ACTION_UP:
-
                             CheckBlue();
+                            oturn.setVisibility(View.VISIBLE);
+                            bturn.setVisibility(View.INVISIBLE);
                             break;
                         default:
 
@@ -364,6 +404,8 @@ public class MainActivity extends AppCompatActivity {
 
                         case MotionEvent.ACTION_UP:
                             CheckOrange();
+                            oturn.setVisibility(View.INVISIBLE);
+                            bturn.setVisibility(View.VISIBLE);
                             break;
 
                         default:
@@ -379,6 +421,8 @@ public class MainActivity extends AppCompatActivity {
         loc4.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
+                down.start();
+                gaqroba2();
                 if (b_clone == b_circle1 || b_clone == b_circle2 || b_clone == b_circle3) {
                     blueXCoordinate = loc4.getX();
                     blueYCoordinate = loc4.getY();
@@ -398,8 +442,9 @@ public class MainActivity extends AppCompatActivity {
 
 
                         case MotionEvent.ACTION_UP:
-
                             CheckBlue();
+                            oturn.setVisibility(View.VISIBLE);
+                            bturn.setVisibility(View.INVISIBLE);
                             break;
                         default:
 
@@ -423,6 +468,8 @@ public class MainActivity extends AppCompatActivity {
 
                         case MotionEvent.ACTION_UP:
                             CheckOrange();
+                            oturn.setVisibility(View.INVISIBLE);
+                            bturn.setVisibility(View.VISIBLE);
                             break;
 
                         default:
@@ -443,7 +490,8 @@ public class MainActivity extends AppCompatActivity {
         loc5.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
-
+                down.start();
+                gaqroba2();
                 if (b_clone == b_circle1 || b_clone == b_circle2 || b_clone == b_circle3) {
                     blueXCoordinate = loc5.getX();
                     blueYCoordinate = loc5.getY();
@@ -461,8 +509,9 @@ public class MainActivity extends AppCompatActivity {
                             figuresXY();
 
                         case MotionEvent.ACTION_UP:
-
                             CheckBlue();
+                            oturn.setVisibility(View.VISIBLE);
+                            bturn.setVisibility(View.INVISIBLE);
                             break;
                         default:
 
@@ -486,6 +535,8 @@ public class MainActivity extends AppCompatActivity {
 
                         case MotionEvent.ACTION_UP:
                             CheckOrange();
+                            oturn.setVisibility(View.INVISIBLE);
+                            bturn.setVisibility(View.VISIBLE);
                             break;
 
                         default:
@@ -504,7 +555,8 @@ public class MainActivity extends AppCompatActivity {
         loc6.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
-
+                down.start();
+                gaqroba2();
                 if (b_clone == b_circle1 || b_clone == b_circle2 || b_clone == b_circle3) {
                     blueXCoordinate = loc6.getX();
                     blueYCoordinate = loc6.getY();
@@ -524,8 +576,9 @@ public class MainActivity extends AppCompatActivity {
 
 
                         case MotionEvent.ACTION_UP:
-
                             CheckBlue();
+                            oturn.setVisibility(View.VISIBLE);
+                            bturn.setVisibility(View.INVISIBLE);
                             break;
                         default:
 
@@ -549,6 +602,8 @@ public class MainActivity extends AppCompatActivity {
 
                         case MotionEvent.ACTION_UP:
                             CheckOrange();
+                            oturn.setVisibility(View.INVISIBLE);
+                            bturn.setVisibility(View.VISIBLE);
                             break;
 
                         default:
@@ -565,7 +620,8 @@ public class MainActivity extends AppCompatActivity {
         loc7.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
-
+                down.start();
+                gaqroba2();
                 if (b_clone == b_circle1 || b_clone == b_circle2 || b_clone == b_circle3) {
                     blueXCoordinate = loc7.getX();
                     blueYCoordinate = loc7.getY();
@@ -583,10 +639,10 @@ public class MainActivity extends AppCompatActivity {
 
                             figuresXY();
 
-
                         case MotionEvent.ACTION_UP:
-
                             CheckBlue();
+                            oturn.setVisibility(View.VISIBLE);
+                            bturn.setVisibility(View.INVISIBLE);
                             break;
                         default:
 
@@ -610,12 +666,12 @@ public class MainActivity extends AppCompatActivity {
 
                         case MotionEvent.ACTION_UP:
                             CheckOrange();
+                            oturn.setVisibility(View.INVISIBLE);
+                            bturn.setVisibility(View.VISIBLE);
                             break;
 
                         default:
-
                             break;
-
                     }
                 }
 
@@ -626,7 +682,8 @@ public class MainActivity extends AppCompatActivity {
         loc8.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
-
+                down.start();
+                gaqroba2();
                 if (b_clone == b_circle1 || b_clone == b_circle2 || b_clone == b_circle3) {
                     blueXCoordinate = loc8.getX();
                     blueYCoordinate = loc8.getY();
@@ -646,8 +703,9 @@ public class MainActivity extends AppCompatActivity {
 
 
                         case MotionEvent.ACTION_UP:
-
                             CheckBlue();
+                            oturn.setVisibility(View.VISIBLE);
+                            bturn.setVisibility(View.INVISIBLE);
                             break;
                         default:
 
@@ -671,6 +729,8 @@ public class MainActivity extends AppCompatActivity {
 
                         case MotionEvent.ACTION_UP:
                             CheckOrange();
+                            oturn.setVisibility(View.INVISIBLE);
+                            bturn.setVisibility(View.VISIBLE);
                             break;
 
                         default:
@@ -687,7 +747,8 @@ public class MainActivity extends AppCompatActivity {
         loc9.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
-
+                down.start();
+                gaqroba2();
                 if (b_clone == b_circle1 || b_clone == b_circle2 || b_clone == b_circle3) {
                     blueXCoordinate = loc9.getX();
                     blueYCoordinate = loc9.getY();
@@ -707,8 +768,9 @@ public class MainActivity extends AppCompatActivity {
 
 
                         case MotionEvent.ACTION_UP:
-
                             CheckBlue();
+                            oturn.setVisibility(View.VISIBLE);
+                            bturn.setVisibility(View.INVISIBLE);
                             break;
                         default:
 
@@ -734,6 +796,8 @@ public class MainActivity extends AppCompatActivity {
 
                         case MotionEvent.ACTION_UP:
                             CheckOrange();
+                            oturn.setVisibility(View.INVISIBLE);
+                            bturn.setVisibility(View.VISIBLE);
                             break;
 
                         default:
@@ -747,9 +811,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
     }
-    
-    public void setparams (){
+
+    ////////////////////////VOIDS///////////////////////
+
+    private void setparams() {
 
         ConstraintLayout.LayoutParams lp;
         lp = (ConstraintLayout.LayoutParams) loc1.getLayoutParams();
@@ -762,11 +829,25 @@ public class MainActivity extends AppCompatActivity {
         o_circle1.setLayoutParams(lp);
         lp = (ConstraintLayout.LayoutParams) loc8.getLayoutParams();
         o_circle2.setLayoutParams(lp);
-        lp = (ConstraintLayout.LayoutParams)loc9.getLayoutParams();
+        lp = (ConstraintLayout.LayoutParams) loc9.getLayoutParams();
         o_circle3.setLayoutParams(lp);
 
 
-    } 
+    }
+
+
+    private void randomTurn() {
+        int Random = (int) Math.round(Math.random());
+        Math.round(Math.random());
+
+        System.out.println(Random);
+        if (Random == 1) {
+            bturn.setVisibility(View.VISIBLE);
+        } else {
+            oturn.setVisibility(View.VISIBLE);
+        }
+    }
+
 
     private void Coordinates() {
         float c1x, c1y, c2x, c2y, c3x, c3y, c4x, c4y, c5x, c5y, c6x, c6y, c7x, c7y, c8x, c8y, c9x, c9y;
@@ -806,6 +887,7 @@ public class MainActivity extends AppCompatActivity {
         c9y = loc9.getY();
         c9 = (c9x + c9y);
 
+
     }
 
 
@@ -842,7 +924,154 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private void gaqroba2() {
+        if (loc1.getVisibility() == View.VISIBLE) {
+            loc1.setVisibility(View.INVISIBLE);
+        }
+        if (loc2.getVisibility() == View.VISIBLE) {
+            loc2.setVisibility(View.INVISIBLE);
+        }
+        if (loc3.getVisibility() == View.VISIBLE) {
+            loc3.setVisibility(View.INVISIBLE);
+        }
+        if (loc4.getVisibility() == View.VISIBLE) {
+            loc4.setVisibility(View.INVISIBLE);
+        }
+        if (loc5.getVisibility() == View.VISIBLE) {
+            loc5.setVisibility(View.INVISIBLE);
+        }
+        if (loc6.getVisibility() == View.VISIBLE) {
+            loc6.setVisibility(View.INVISIBLE);
+        }
+        if (loc7.getVisibility() == View.VISIBLE) {
+            loc7.setVisibility(View.INVISIBLE);
+        }
+        if (loc8.getVisibility() == View.VISIBLE) {
+            loc8.setVisibility(View.INVISIBLE);
+        }
+        if (loc9.getVisibility() == View.VISIBLE) {
+            loc9.setVisibility(View.INVISIBLE);
+        }
+
+    }
+
+    //////////////////////Figure State///////////////////////
+    private void BlueState() {
+
+        float bX, bY;
+        double cloneXY;
+
+        bX = b_clone.getX();
+        bY = b_clone.getY();
+        cloneXY = (bX + bY);
+
+
+        if (cloneXY == c1) {
+            loc2.setVisibility(View.VISIBLE);
+            loc4.setVisibility(View.VISIBLE);
+            loc5.setVisibility(View.VISIBLE);
+        } else if (cloneXY == c2) {
+            loc1.setVisibility(View.VISIBLE);
+            loc3.setVisibility(View.VISIBLE);
+            loc5.setVisibility(View.VISIBLE);
+        } else if (cloneXY == c3) {
+            loc2.setVisibility(View.VISIBLE);
+            loc5.setVisibility(View.VISIBLE);
+            loc6.setVisibility(View.VISIBLE);
+        } else if (cloneXY == c4) {
+            loc1.setVisibility(View.VISIBLE);
+            loc5.setVisibility(View.VISIBLE);
+            loc7.setVisibility(View.VISIBLE);
+        } else if (cloneXY == c5) {
+            loc1.setVisibility(View.VISIBLE);
+            loc2.setVisibility(View.VISIBLE);
+            loc3.setVisibility(View.VISIBLE);
+            loc4.setVisibility(View.VISIBLE);
+            loc5.setVisibility(View.VISIBLE);
+            loc6.setVisibility(View.VISIBLE);
+            loc7.setVisibility(View.VISIBLE);
+            loc8.setVisibility(View.VISIBLE);
+            loc9.setVisibility(View.VISIBLE);
+        } else if (cloneXY == c6) {
+            loc5.setVisibility(View.VISIBLE);
+            loc3.setVisibility(View.VISIBLE);
+            loc9.setVisibility(View.VISIBLE);
+
+        } else if (cloneXY == c7) {
+            loc4.setVisibility(View.VISIBLE);
+            loc5.setVisibility(View.VISIBLE);
+            loc8.setVisibility(View.VISIBLE);
+        } else if (cloneXY == c8) {
+            loc7.setVisibility(View.VISIBLE);
+            loc5.setVisibility(View.VISIBLE);
+            loc9.setVisibility(View.VISIBLE);
+        } else if (cloneXY == c9) {
+            loc6.setVisibility(View.VISIBLE);
+            loc5.setVisibility(View.VISIBLE);
+            loc8.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void OrangeState() {
+        double cloneXY;
+        float oX, oY;
+        oX = o_clone.getX();
+        oY = o_clone.getY();
+        cloneXY = (oX + oY);
+
+
+        if (cloneXY == c1) {
+            loc2.setVisibility(View.VISIBLE);
+            loc4.setVisibility(View.VISIBLE);
+            loc5.setVisibility(View.VISIBLE);
+        } else if (cloneXY == c2) {
+            loc1.setVisibility(View.VISIBLE);
+            loc3.setVisibility(View.VISIBLE);
+            loc5.setVisibility(View.VISIBLE);
+        } else if (cloneXY == c3) {
+            loc2.setVisibility(View.VISIBLE);
+            loc5.setVisibility(View.VISIBLE);
+            loc6.setVisibility(View.VISIBLE);
+        } else if (cloneXY == c4) {
+            loc1.setVisibility(View.VISIBLE);
+            loc5.setVisibility(View.VISIBLE);
+            loc7.setVisibility(View.VISIBLE);
+        } else if (cloneXY == c5) {
+            loc1.setVisibility(View.VISIBLE);
+            loc2.setVisibility(View.VISIBLE);
+            loc3.setVisibility(View.VISIBLE);
+            loc4.setVisibility(View.VISIBLE);
+            loc5.setVisibility(View.VISIBLE);
+            loc6.setVisibility(View.VISIBLE);
+            loc7.setVisibility(View.VISIBLE);
+            loc8.setVisibility(View.VISIBLE);
+            loc9.setVisibility(View.VISIBLE);
+        } else if (cloneXY == c6) {
+            loc5.setVisibility(View.VISIBLE);
+            loc3.setVisibility(View.VISIBLE);
+            loc9.setVisibility(View.VISIBLE);
+        } else if (cloneXY == c7) {
+            loc5.setVisibility(View.VISIBLE);
+            loc8.setVisibility(View.VISIBLE);
+            loc4.setVisibility(View.VISIBLE);
+        } else if (cloneXY == c8) {
+            loc7.setVisibility(View.VISIBLE);
+            loc5.setVisibility(View.VISIBLE);
+            loc9.setVisibility(View.VISIBLE);
+        } else if (cloneXY == c9) {
+            loc6.setVisibility(View.VISIBLE);
+            loc5.setVisibility(View.VISIBLE);
+            loc8.setVisibility(View.VISIBLE);
+        }
+
+    }
+
+
+//////////////////////Figure State///////////////////////
+
+
     private void CheckBlue() {
+
 
         if (c4 == blueF1 && c5 == blueF2 && c6 == blueF3 ||
                 c4 == blueF2 && c5 == blueF3 && c6 == blueF1 ||
@@ -850,23 +1079,23 @@ public class MainActivity extends AppCompatActivity {
                 c4 == blueF1 && c5 == blueF3 && c6 == blueF2 ||
                 c4 == blueF2 && c5 == blueF1 && c6 == blueF3 ||
                 c4 == blueF3 && c5 == blueF2 && c6 == blueF1
-
                 ) {
-            wintext.setText("BlueWins");
+
+            wintext.setText("Blue Wins");
         } else if (c1 == blueF1 && c4 == blueF2 && c7 == blueF3 ||
                 c1 == blueF2 && c4 == blueF3 && c7 == blueF1 ||
                 c1 == blueF3 && c4 == blueF1 && c7 == blueF2 ||
                 c1 == blueF1 && c4 == blueF3 && c7 == blueF2 ||
                 c1 == blueF2 && c4 == blueF1 && c7 == blueF3 ||
                 c1 == blueF3 && c4 == blueF2 && c7 == blueF1) {
-            wintext.setText("BlueWins");
+            wintext.setText("Blue Wins");
         } else if (c3 == blueF1 && c6 == blueF2 && c9 == blueF3 ||
                 c3 == blueF2 && c6 == blueF3 && c9 == blueF1 ||
                 c3 == blueF3 && c6 == blueF1 && c9 == blueF2 ||
                 c3 == blueF1 && c6 == blueF3 && c9 == blueF2 ||
                 c3 == blueF2 && c6 == blueF1 && c9 == blueF3 ||
                 c3 == blueF3 && c6 == blueF2 && c9 == blueF1) {
-            wintext.setText("BlueWins");
+            wintext.setText("Blue Wins");
 
         } else if (c3 == blueF1 && c5 == blueF2 && c7 == blueF3 ||
                 c3 == blueF2 && c5 == blueF3 && c7 == blueF1 ||
@@ -874,29 +1103,31 @@ public class MainActivity extends AppCompatActivity {
                 c3 == blueF1 && c5 == blueF3 && c7 == blueF2 ||
                 c3 == blueF2 && c5 == blueF1 && c7 == blueF3 ||
                 c3 == blueF3 && c5 == blueF2 && c7 == blueF1) {
-            wintext.setText("BlueWins");
+            wintext.setText("Blue Wins");
         } else if (c1 == blueF1 && c5 == blueF2 && c9 == blueF3 ||
                 c1 == blueF2 && c5 == blueF3 && c9 == blueF1 ||
                 c1 == blueF3 && c5 == blueF1 && c9 == blueF2 ||
                 c1 == blueF1 && c5 == blueF3 && c9 == blueF2 ||
                 c1 == blueF2 && c5 == blueF1 && c9 == blueF3 ||
                 c1 == blueF3 && c5 == blueF2 && c9 == blueF1) {
-            wintext.setText("BlueWins");
+            wintext.setText("Blue Wins");
         } else if (c7 == blueF1 && c8 == blueF2 && c9 == blueF3 ||
                 c7 == blueF2 && c8 == blueF3 && c9 == blueF1 ||
                 c7 == blueF3 && c8 == blueF1 && c9 == blueF2 ||
                 c7 == blueF1 && c8 == blueF3 && c9 == blueF2 ||
                 c7 == blueF2 && c8 == blueF1 && c9 == blueF3 ||
                 c7 == blueF3 && c8 == blueF2 && c9 == blueF1) {
-            wintext.setText("BlueWins");
+            wintext.setText("Blue Wins");
         } else if (c2 == blueF1 && c5 == blueF2 && c8 == blueF3 ||
                 c2 == blueF2 && c5 == blueF3 && c8 == blueF1 ||
                 c2 == blueF3 && c5 == blueF1 && c8 == blueF2 ||
                 c2 == blueF1 && c5 == blueF3 && c8 == blueF2 ||
                 c2 == blueF2 && c5 == blueF1 && c8 == blueF3 ||
                 c2 == blueF3 && c5 == blueF2 && c8 == blueF1) {
-            wintext.setText("BlueWins");
-        }
+            wintext.setText("Blue Wins");
+        } else
+            wintext.setText("");
+
 
     }
 
@@ -911,21 +1142,21 @@ public class MainActivity extends AppCompatActivity {
                 c4 == orangeF3 && c5 == orangeF2 && c6 == orangeF1
 
                 ) {
-            wintext.setText("orangeWins");
+            wintext.setText("Orange Wins");
         } else if (c1 == orangeF1 && c4 == orangeF2 && c7 == orangeF3 ||
                 c1 == orangeF2 && c4 == orangeF3 && c7 == orangeF1 ||
                 c1 == orangeF3 && c4 == orangeF1 && c7 == orangeF2 ||
                 c1 == orangeF1 && c4 == orangeF3 && c7 == orangeF2 ||
                 c1 == orangeF2 && c4 == orangeF1 && c7 == orangeF3 ||
                 c1 == orangeF3 && c4 == orangeF2 && c7 == orangeF1) {
-            wintext.setText("orangeWins");
+            wintext.setText("Orange Wins");
         } else if (c3 == orangeF1 && c6 == orangeF2 && c9 == orangeF3 ||
                 c3 == orangeF2 && c6 == orangeF3 && c9 == orangeF1 ||
                 c3 == orangeF3 && c6 == orangeF1 && c9 == orangeF2 ||
                 c3 == orangeF1 && c6 == orangeF3 && c9 == orangeF2 ||
                 c3 == orangeF2 && c6 == orangeF1 && c9 == orangeF3 ||
                 c3 == orangeF3 && c6 == orangeF2 && c9 == orangeF1) {
-            wintext.setText("orangeWins");
+            wintext.setText("Orange Wins");
 
         } else if (c3 == orangeF1 && c5 == orangeF2 && c7 == orangeF3 ||
                 c3 == orangeF2 && c5 == orangeF3 && c7 == orangeF1 ||
@@ -933,29 +1164,30 @@ public class MainActivity extends AppCompatActivity {
                 c3 == orangeF1 && c5 == orangeF3 && c7 == orangeF2 ||
                 c3 == orangeF2 && c5 == orangeF1 && c7 == orangeF3 ||
                 c3 == orangeF3 && c5 == orangeF2 && c7 == orangeF1) {
-            wintext.setText("orangeWins");
+            wintext.setText("Orange Wins");
         } else if (c1 == orangeF1 && c5 == orangeF2 && c9 == orangeF3 ||
                 c1 == orangeF2 && c5 == orangeF3 && c9 == orangeF1 ||
                 c1 == orangeF3 && c5 == orangeF1 && c9 == orangeF2 ||
                 c1 == orangeF1 && c5 == orangeF3 && c9 == orangeF2 ||
                 c1 == orangeF2 && c5 == orangeF1 && c9 == orangeF3 ||
                 c1 == orangeF3 && c5 == orangeF2 && c9 == orangeF1) {
-            wintext.setText("orangeWins");
+            wintext.setText("Orange Wins");
         } else if (c1 == orangeF1 && c2 == orangeF2 && c3 == orangeF3 ||
                 c1 == orangeF2 && c2 == orangeF3 && c3 == orangeF1 ||
                 c1 == orangeF3 && c2 == orangeF1 && c3 == orangeF2 ||
                 c1 == orangeF1 && c2 == orangeF3 && c3 == orangeF2 ||
                 c1 == orangeF2 && c2 == orangeF1 && c3 == orangeF3 ||
                 c1 == orangeF3 && c2 == orangeF2 && c3 == orangeF1) {
-            wintext.setText("orangeWins");
+            wintext.setText("Orange Wins");
         } else if (c2 == orangeF1 && c5 == orangeF2 && c8 == orangeF3 ||
                 c2 == orangeF2 && c5 == orangeF3 && c8 == orangeF1 ||
                 c2 == orangeF3 && c5 == orangeF1 && c8 == orangeF2 ||
                 c2 == orangeF1 && c5 == orangeF3 && c8 == orangeF2 ||
                 c2 == orangeF2 && c5 == orangeF1 && c8 == orangeF3 ||
                 c2 == orangeF3 && c5 == orangeF2 && c8 == orangeF1) {
-            wintext.setText("orangeWins");
-        }
+            wintext.setText("Orange Wins");
+        } else
+            wintext.setText("");
 
     }
 

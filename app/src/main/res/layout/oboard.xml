@@ -8,7 +8,7 @@
     android:layout_gravity="center"
     android:animateLayoutChanges="true"
     android:background="@color/colorAccent"
-    tools:context=".MainActivity">
+    tools:context=".OBoard">
 
 
     <ImageView
@@ -24,19 +24,17 @@
 
     <ImageView
         android:id="@+id/board"
-        android:layout_width="364dp"
-        android:layout_height="364dp"
+        android:layout_width="347dp"
+        android:layout_height="356dp"
         android:foregroundGravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"
         app:srcCompat="@drawable/d" />
 
     <ImageView
-        android:id="@+id/loc1"
+        android:id="@+id/loca1"
         android:layout_width="49dp"
         android:layout_height="49dp"
         app:layout_constraintBottom_toBottomOf="@+id/board"
@@ -48,7 +46,20 @@
         app:srcCompat="@drawable/location" />
 
     <ImageView
-        android:id="@+id/loc2"
+        android:id="@+id/loc1"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/board"
+        app:layout_constraintEnd_toEndOf="@+id/board"
+        app:layout_constraintHorizontal_bias="0.009"
+        app:layout_constraintStart_toStartOf="@+id/board"
+        app:layout_constraintTop_toTopOf="@+id/board"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/location1" />
+
+    <ImageView
+        android:id="@+id/loca2"
         android:layout_width="49dp"
         android:layout_height="49dp"
         app:layout_constraintBottom_toBottomOf="@+id/board"
@@ -60,7 +71,19 @@
         app:srcCompat="@drawable/location" />
 
     <ImageView
-        android:id="@+id/loc3"
+        android:id="@+id/loc2"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/board"
+        app:layout_constraintEnd_toEndOf="@+id/board"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="@+id/board"
+        app:layout_constraintTop_toTopOf="@+id/board"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/location1" />
+    <ImageView
+        android:id="@+id/loca3"
         android:layout_width="49dp"
         android:layout_height="49dp"
         app:layout_constraintBottom_toBottomOf="@+id/board"
@@ -72,7 +95,19 @@
         app:srcCompat="@drawable/location" />
 
     <ImageView
-        android:id="@+id/loc4"
+        android:id="@+id/loc3"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/board"
+        app:layout_constraintEnd_toEndOf="@+id/board"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/board"
+        app:layout_constraintTop_toTopOf="@+id/board"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/location1" />
+    <ImageView
+        android:id="@+id/loca4"
         android:layout_width="49dp"
         android:layout_height="49dp"
         app:layout_constraintBottom_toBottomOf="@+id/board"
@@ -84,7 +119,19 @@
         app:srcCompat="@drawable/location" />
 
     <ImageView
-        android:id="@+id/loc5"
+        android:id="@+id/loc4"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/board"
+        app:layout_constraintEnd_toEndOf="@+id/board"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/board"
+        app:layout_constraintTop_toTopOf="@+id/board"
+        app:layout_constraintVertical_bias="0.501"
+        app:srcCompat="@drawable/location1" />
+    <ImageView
+        android:id="@+id/loca5"
         android:layout_width="49dp"
         android:layout_height="49dp"
         app:layout_constraintBottom_toBottomOf="@+id/board"
@@ -96,7 +143,20 @@
         app:srcCompat="@drawable/location" />
 
     <ImageView
-        android:id="@+id/loc6"
+        android:id="@+id/loc5"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/board"
+        app:layout_constraintEnd_toEndOf="@+id/board"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="@+id/board"
+        app:layout_constraintTop_toTopOf="@+id/board"
+        app:layout_constraintVertical_bias="0.504"
+        app:srcCompat="@drawable/location1" />
+
+    <ImageView
+        android:id="@+id/loca6"
         android:layout_width="49dp"
         android:layout_height="49dp"
         app:layout_constraintBottom_toBottomOf="@+id/board"
@@ -108,7 +168,20 @@
         app:srcCompat="@drawable/location" />
 
     <ImageView
-        android:id="@+id/loc7"
+        android:id="@+id/loc6"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/board"
+        app:layout_constraintEnd_toEndOf="@+id/board"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/board"
+        app:layout_constraintTop_toTopOf="@+id/board"
+        app:layout_constraintVertical_bias="0.501"
+        app:srcCompat="@drawable/location1" />
+
+    <ImageView
+        android:id="@+id/loca7"
         android:layout_width="49dp"
         android:layout_height="49dp"
         app:layout_constraintBottom_toBottomOf="@+id/board"
@@ -120,7 +193,20 @@
         app:srcCompat="@drawable/location" />
 
     <ImageView
-        android:id="@+id/loc8"
+        android:id="@+id/loc7"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/board"
+        app:layout_constraintEnd_toEndOf="@+id/board"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/board"
+        app:layout_constraintTop_toTopOf="@+id/board"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/location1" />
+
+    <ImageView
+        android:id="@+id/loca8"
         android:layout_width="49dp"
         android:layout_height="49dp"
         app:layout_constraintBottom_toBottomOf="@+id/board"
@@ -132,7 +218,20 @@
         app:srcCompat="@drawable/location" />
 
     <ImageView
-        android:id="@+id/loc9"
+        android:id="@+id/loc8"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/board"
+        app:layout_constraintEnd_toEndOf="@+id/board"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="@+id/board"
+        app:layout_constraintTop_toTopOf="@+id/board"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/location1" />
+
+    <ImageView
+        android:id="@+id/loca9"
         android:layout_width="49dp"
         android:layout_height="49dp"
         app:layout_constraintBottom_toBottomOf="@+id/board"
@@ -144,9 +243,23 @@
         app:srcCompat="@drawable/location" />
 
     <ImageView
+        android:id="@+id/loc9"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/board"
+        app:layout_constraintEnd_toEndOf="@+id/board"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/board"
+        app:layout_constraintTop_toTopOf="@+id/board"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/location1" />
+
+    <ImageView
         android:id="@+id/b_circle1"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -159,6 +272,7 @@
         android:id="@+id/b_circle2"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -172,6 +286,7 @@
         android:id="@+id/b_circle3"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -181,22 +296,10 @@
         app:srcCompat="@drawable/c" />
 
     <ImageView
-        android:id="@+id/o_circle3"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:animateLayoutChanges="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499"
-        app:srcCompat="@drawable/c1" />
-
-    <ImageView
         android:id="@+id/o_circle1"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -209,6 +312,7 @@
         android:id="@+id/o_circle2"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -217,6 +321,20 @@
         app:layout_constraintVertical_bias="0.499"
         app:srcCompat="@drawable/c1" />
 
+
+    <ImageView
+        android:id="@+id/o_circle3"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:animateLayoutChanges="true"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499"
+        app:srcCompat="@drawable/c1" />
 
     <TextView
         android:id="@+id/wintext"
@@ -235,6 +353,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/bturn"
+        android:layout_width="95dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:rotation="90"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/loca2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:srcCompat="?attr/homeAsUpIndicator" />
+
+    <ImageView
+        android:id="@+id/oturn"
+        android:layout_width="95dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:rotation="270"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loca8"
+        app:srcCompat="?attr/homeAsUpIndicator" />
 
 
 </android.support.constraint.ConstraintLayout>

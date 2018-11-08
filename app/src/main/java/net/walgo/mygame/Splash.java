@@ -3,11 +3,12 @@ package net.walgo.mygame;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
-public class Splash extends MainActivity {
+public class Splash extends OBoard {
 
 
 
@@ -19,7 +20,14 @@ public class Splash extends MainActivity {
 
         ImageView image = findViewById(R.id.starimg);
 
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
 
+                startActivity(new Intent(Splash.this, OBoard.class));
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+            }
+        }, 2000);
 
         image.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -30,7 +38,8 @@ public class Splash extends MainActivity {
                         break;
                     case MotionEvent.ACTION_UP:
 
-                        startActivity(new Intent(Splash.this, MainActivity.class));
+                        startActivity(new Intent(Splash.this, OBoard.class));
+                        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                         break;
 
                     default:
