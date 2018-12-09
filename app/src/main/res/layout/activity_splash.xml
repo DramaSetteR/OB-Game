@@ -4,22 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+
+    android:background="@drawable/shrine"
     tools:context=".Splash">
-    <ImageView
-        android:id="@+id/imageVdasdadasiew"
-        android:layout_width="467dp"
-        android:layout_height="713dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.185"
-        app:srcCompat="@drawable/x" />
 
     <ImageView
         android:id="@+id/starimg"
-        android:layout_width="199dp"
-        android:layout_height="167dp"
+        android:layout_width="176dp"
+        android:layout_height="93dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

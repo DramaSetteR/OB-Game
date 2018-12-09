@@ -8,6 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
+
+
+        <item name="android:windowActivityTransitions">true</item>
+    </style>
+    <style name="AppTheme.PopMe">
+        <item name="android:windowIsTranslucent">true</item>
+
     </style>
 
 </resources>
