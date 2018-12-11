@@ -1,0 +1,4 @@
+#Sun Dec 09 23:47:15 GET 2018
+base.0=C\:\\Users\\blind\\AndroidStudioProjects\\MyGame\\app\\build\\intermediates\\transforms\\dexMerger\\release\\0
+path.0=classes.dex
+renamed.0=classes.dex
